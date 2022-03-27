@@ -1,0 +1,167 @@
+package AirConditioner;
+public class AirConditioner {
+
+	public static void main(String[] args) {
+		
+		AirConditionerManufacturingCompanyIncome ac=new AirConditionerManufacturingCompanyIncome();
+		ac.setAnnualRevenue(3500000.00);
+		ac.setAnnualExpense(800000);
+		System.out.println("This is AC Manufacturing company.");
+		ac.usesElectricity();
+		System.out.println("Total Annual Expense: "+ac.getAnnualExpense());
+		System.out.println("Total Annual Revenue: "+ac.getAnnualRevenue());
+		System.out.println("Total Profit: "+ac.profitLoss());
+		System.out.println("Total revenue of AC Manufacturing company: "+AirConditionerManufacturingCompanyIncome.getAnnualRevenue());
+		Hotel h=ac.moneyInvested();
+		System.out.println("Money Invested in Hotel Business Annually : "+h.getMoneyInvestedOnHotel());
+		Restaurant res=ac.moneyInvested2();
+		System.out.println("Money Invested in Restaurant Business Annually : "+res.getMoneyInvestedOnRestaurant());
+		StockTrading st=ac.moneyInvested3();
+		System.out.println("Money Invested in Stock Trading Annually : "+st.getMoneyInvestedOnStock());
+	}
+
+}
+
+abstract class Electronics{
+	public void usesElectricity() {
+		System.out.println("Electronics needs Electricity to run");
+	}
+}
+
+interface Business{// Interface
+	double profitLoss();
+}
+
+class AirConditionerManufacturingCompanyIncome extends Electronics implements Business{
+	
+	private static double revenue;
+	private static double expense;
+	protected double result;
+	
+	static double getAnnualRevenue(){
+		return revenue;
+	}
+	public void setAnnualRevenue(double rev) {
+		revenue=rev;
+	}
+	
+	public static double getAnnualExpense() {
+		return expense;
+	}
+	public static void setAnnualExpense(double expense) {
+		AirConditionerManufacturingCompanyIncome.expense = expense;
+	}
+	Hotel moneyInvested() {	//produces  		
+		
+		Hotel h=new Hotel(35);//create object of class Hotel. Passing argument percentOfRevenue.
+		
+		return h;
+		
+	}
+	Restaurant moneyInvested2() {//produces
+		Restaurant r=new Restaurant(20);
+		return r;
+	}
+	
+	StockTrading moneyInvested3() {//produces
+		StockTrading st = new StockTrading(15);
+		return st;
+	}
+	
+	public double profitLoss() {
+		result=revenue-expense;
+		return result;
+		
+	}
+	
+}
+
+class Hotel{	
+	
+	float percentOfRevenue;
+	double moneyInvestOnHotel ;
+	
+	Hotel(float percentOfRevenue){
+		this.percentOfRevenue=percentOfRevenue;
+		
+	}
+	
+	public double getMoneyInvestedOnHotel() {
+		double revenue=AirConditionerManufacturingCompanyIncome.getAnnualRevenue();//getting revenue of Parent Company
+		moneyInvestOnHotel=(revenue*percentOfRevenue)/100;// Calculating money invested Annually
+		return moneyInvestOnHotel;
+	}
+	
+	
+	
+	BarAndRestaurant servesFoodandWine() {//has-a
+		return new BarAndRestaurant();
+	}	
+}
+
+class Restaurant{
+	float percentOfRevenue;
+	double moneyInvestOnHotel ;
+	Restaurant(){}
+	
+	Restaurant(float percentOfRevenue){
+		this.percentOfRevenue=percentOfRevenue;
+		
+	}
+	
+	public double getMoneyInvestedOnRestaurant() {
+		double revenue=AirConditionerManufacturingCompanyIncome.getAnnualRevenue();//getting revenue of Parent Company
+		moneyInvestOnHotel=(revenue*percentOfRevenue)/100;
+		return moneyInvestOnHotel;
+}
+}
+
+class BarAndRestaurant extends Restaurant{//is-a	
+	BarAndRestaurant(){}
+	ReportCard feedbackForm() {//has-a
+		return new ReportCard();
+	}
+}
+
+class ReportCard {
+
+}
+
+class StockTrading{
+	float percentOfRevenue;
+	double moneyInvestOnHotel ;
+	
+	StockTrading(float percentOfRevenue){
+		this.percentOfRevenue=percentOfRevenue;
+		
+	}
+	
+	public double getMoneyInvestedOnStock() {
+		double revenue=AirConditionerManufacturingCompanyIncome.getAnnualRevenue();//getting revenue of Parent Company
+		moneyInvestOnHotel=(revenue*percentOfRevenue)/100;// Calculating money invested Annually
+		return moneyInvestOnHotel;
+	}
+}
+	
+
+
+
+class Arpana{
+	Movie freeTime(Money money) { // use A
+		return new Movie();
+	}
+	Book freeTime2(Money money) {
+		return new Book();
+	}
+
+}
+
+class Movie{
+	
+}
+
+class Book{
+	
+}
+
+class Money{}
