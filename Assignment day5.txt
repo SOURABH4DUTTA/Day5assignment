@@ -1,4 +1,4 @@
-package AirConditioner;
+package airConditioner;
 public class AirConditioner {
 
 	public static void main(String[] args) {
