@@ -1,0 +1,273 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.TreeSet;
+
+//		Employee staff[] = new Employee[5];//just 5 references | 
+//		staff[0] = new Employee(101,"a",10000);
+//		staff[1] = new Employee(102,"b",11000);
+//		staff[2] = new Employee(103,"c",12000);
+//		staff[3] = new Employee(104,"d",13000);
+//		staff[4] = new Employee(105,"e",14000);
+//		
+//		for(int i=0;i <staff.length;i++)
+//		{
+//			System.out.println("staff ;" +staff[i]);
+//	}
+
+public class ObjectArray {
+
+	public static void main(String[] args) {
+
+//		TreeSet<Integer> primeNumbers = new TreeSet<Integer>();
+//		System.out.println("adding first prime");
+//		primeNumbers.add(2);
+//
+//		System.out.println("adding 2nd prime");
+//		primeNumbers.add(3);
+//
+//		System.out.println("adding 3rd prime");
+//		primeNumbers.add(5);
+//
+//		System.out.println("adding 4th prime");
+//		primeNumbers.add(7);
+//		primeNumbers.add(11);
+//		primeNumbers.add(13);
+//		primeNumbers.add(17);
+//		primeNumbers.add(19);
+//		System.out.println("added all the primes");
+//
+//		Iterator<Integer> primeIterator = primeNumbers.iterator();
+//		while (primeIterator.hasNext()) {
+//			int x = (int) primeIterator.next();
+//			System.out.println("prime " + x);
+//		}
+//
+//		Employee e1 = new Employee(5, "jack", 4000);
+//		Employee e2 = new Employee(95, "jane", 3000);
+//		Employee e3 = new Employee(1, "jill", 2000);
+
+// 	    ArrayList<Employee> staff = new ArrayList<Employee>();
+
+//		LinkedList<Employee> staff = new LinkedList<Employee>();
+
+//		HashSet<Employee>staffhash = new HashSet<Employee>();
+
+//		for(int i =0; i<staff.size();i++)
+//		{
+//			System.out.println("Staff :"+staff.get(i));
+//		}
+
+//		TreeSet<Employee> staff = new TreeSet<Employee>();
+//		System.out.println("Tree set is created....");
+//
+//		System.out.println("trying to add 1st object...");
+//		staff.add(new Employee(35, "Shashi", 5000)); // allocate empno,ename,salary
+//
+//		System.out.println("trying to add 2nd object...");
+//		staff.add(new Employee(12, "Ayan", 6000));
+//
+//		System.out.println("trying to add 3rd object...");
+//		staff.add(new Employee(65, "Nimya", 7000));
+//
+//		System.out.println("trying to add 4th object...");
+//		staff.add(new Employee(10, "KrishnaKumar", 8000));
+//
+//		System.out.println("trying to add 5th object...");
+//		staff.add(new Employee(85, "Suraj", 9000));
+//
+//		System.out.println("trying to add 6th object...");
+//		staff.add(e1);
+//
+//		System.out.println("trying to add 7th object...");
+//		staff.add(e2);
+//
+//		System.out.println("trying to add 8th object...");
+//		staff.add(e3);
+//
+//		System.out.println("Adding 9th employee...");
+//		staff.add(new Employee(109, "Sourabh", 10000));
+//
+//		System.out.println("Added the 9th employee....");
+//
+//		Iterator<Employee> iterator = staff.iterator();
+//
+//		while (iterator.hasNext()) {
+//			Employee theEmp = iterator.next();
+//			System.out.println("employee : " + theEmp);
+//		}
+		HashSet<Book>bookhash = new HashSet<Book>();
+		bookhash.add(new Book(1469876532145l,"My experiment with truth","M k Gandhi",230,"fifth",590));
+		bookhash.add(new Book(3641529877234l,"Discovery of India","J L Nehru",420,"third",300));
+		bookhash.add(new Book(1986214789236l,"God of small things","Arundhati Roy",250,"ninth",300));
+		
+		Iterator<Book> iterator1 = bookhash.iterator();
+		while (iterator1.hasNext())
+		{
+			Book bookHash = iterator1.next();
+			System.out.println("--------Book--------- : " + bookHash);	
+		}
+		
+		
+		
+		ArrayList<Log> arraylog = new ArrayList<Log>();
+		arraylog.add(new Log("Missed",LocalDate.of(2022, 02, 14),"A"));
+		arraylog.add(new Log("Dialed",LocalDate.of(2022, 02, 21),"H"));
+		arraylog.add(new Log("Received",LocalDate.of(2022, 03, 28),"N"));
+		System.out.println("-----------Log----------");
+		
+		Iterator<Log> iterator2 = arraylog.iterator();
+		while (iterator2.hasNext())
+		{
+			Log arrayLog = iterator2.next();
+			System.out.println("Logs... : " + arrayLog);	
+		}
+		
+		
+		
+		LinkedList<Contact> linkcontact = new LinkedList<Contact>();
+		linkcontact.add(new Contact("Sulabh",9997489666l,"acb@gmail.com"));
+		linkcontact.add(new Contact("Pallavi",7854123697l,"pfrb@gmail.com"));
+		linkcontact.add(new Contact("Utpal",8961234785l,"cbg@gmail.com"));
+		
+		Iterator<Contact> iterator3 = linkcontact.iterator();
+		while (iterator3.hasNext())
+		{
+			Contact linkContact = iterator3.next();
+			System.out.println("Contacts are ... : " + linkContact);	
+		}
+		
+		
+		TreeSet<ChemicalElement> ce = new TreeSet<ChemicalElement>();
+		ce.add(new ChemicalElement(1,"Hydrogen","H",1.0078d));
+		ce.add(new ChemicalElement(10,"Neon","Ne",20.17d));
+		ce.add(new ChemicalElement(17,"Chlorine","cl",35.43d));
+		
+		Iterator<ChemicalElement> iterator4 = ce.iterator();
+		while (iterator4.hasNext())
+		{
+			ChemicalElement cE = iterator4.next();
+			System.out.println("Chemical elements are ... : " + cE);	
+		}
+	}
+}
+
+class Employee implements Comparable<Employee> {
+	int employeeNumber;
+	String employeeName;
+	float salary;
+
+	public Employee(int employeeNumber, String employeeName, float salary) {
+		super();
+		this.employeeNumber = employeeNumber;
+		this.employeeName = employeeName;
+		this.salary = salary;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [employeeNumber=" + employeeNumber + ", employeeName=" + employeeName + ", salary=" + salary
+				+ "]";
+	}
+
+	public int compareTo(Employee o) {
+		System.out.println("Comparing  " + employeeNumber + " with " + o.employeeNumber);
+		return Integer.compare(employeeNumber, o.employeeNumber);
+
+	}
+}
+
+class Book {
+	double isbnNumber;
+	String bookName;
+	String author;
+	int noOfPages;
+	String edition;
+	int price;
+
+	public Book(double isbnNumber, String bookName, String author, int noOfPages, String edition, int price) {
+		super();
+		this.isbnNumber = isbnNumber;
+		this.bookName = bookName;
+		this.author = author;
+		this.noOfPages = noOfPages;
+		this.edition = edition;
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "book [isbnNumber=" + isbnNumber + ", bookName=" + bookName + ", author=" + author + ", noOfPages="
+				+ noOfPages + ", edition=" + edition + ", price=" + price + "]";
+	}
+
+}
+
+class Log {
+	String logType;
+	LocalDate logDate;
+	String name;
+
+	public Log(String logType, LocalDate logDate, String name) {
+		super();
+		this.logType = logType;
+		this.logDate = logDate;
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Log [logType=" + logType + ", logDate=" + logDate + ", name=" + name + "]";
+	}
+
+}
+
+class Contact {
+	String contactNAme;
+	long mobilenumber;
+	String emailAddress;
+
+	public Contact(String contactNAme, long mobilenumber, String emailAddress) {
+		super();
+		this.contactNAme = contactNAme;
+		this.mobilenumber = mobilenumber;
+		this.emailAddress = emailAddress;
+	}
+
+	@Override
+	public String toString() {
+		return "Contact [contactNAme=" + contactNAme + ", mobilenumber=" + mobilenumber + ", emailAddress="
+				+ emailAddress + "]";
+	}
+
+}
+
+class ChemicalElement implements Comparable<ChemicalElement> {
+	int atomicNumber;
+	String atomicName;
+	String atomicFormula;
+	double atomicWeight;
+
+	public ChemicalElement(int atomicNumber, String atomicName, String atomicFormula, double atomicWeight) {
+		super();
+		this.atomicNumber = atomicNumber;
+		this.atomicName = atomicName;
+		this.atomicFormula = atomicFormula;
+		this.atomicWeight = atomicWeight;
+	}
+
+	@Override
+	public String toString() {
+		return "ChemicalElement [atomicNumber=" + atomicNumber + ", atomicName=" + atomicName + ", atomicFormula="
+				+ atomicFormula + ", atomicWeight=" + atomicWeight + "]";
+	}
+
+	@Override
+	public int compareTo(ChemicalElement o) {
+		// TODO Auto-generated method stub
+		return Integer.compare(atomicNumber, o.atomicNumber);
+	}
+
+}
