@@ -1,14 +1,16 @@
+package PackageProduct;
+
 public class ExceptionTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Main Loop begins");
-		Locker h1 = new Locker(102, "Mathru Nilaya", "Bengaluru", "abcd");
-		Locker h2 = new Locker(112, "Sai Nilaya", "Navi Mumbai", "efgh");
-		LockerOwner o1 = new LockerOwner();
-		LockerOwner o2 = new LockerOwner();
-		LockerKey hk1 = new LockerKey("abcd");
-		LockerKey hk2 = new LockerKey("efgh");
+		Locker h1 = new Locker(102, " Nathan Cherian ", "Hyderabad", "bund",569875);
+		Locker h2 = new Locker(112, " Paulomi Ghosh ", "Kolkata", "roop",459687);
+		LockerOwner lo1 = new LockerOwner();
+		LockerOwner lo2 = new LockerOwner();
+		LockerKey hk1 = new LockerKey("bund");
+		LockerKey hk2 = new LockerKey("roop");
 		
 		Thread td1 = new Thread(h1);
 		td1.start();
@@ -17,7 +19,7 @@ public class ExceptionTest {
 		
 		try
 		{
-			o1.openTheLocker(h1,hk1);
+			lo1.openTheLocker(h1,hk1);
 		}
 		catch (LockException e) {
 			// TODO: handle exception
@@ -34,48 +36,59 @@ public class ExceptionTest {
 
 }
 //Interface
-interface Person2
+interface Gentlemen
 {
-	void openTheLocker(Building1 bd,Key k) throws LockException,UnlockException;
-	void takeFood();
+	void openTheLocker(Cabinet1 cb,Key k) throws LockException,UnlockException;
+	void operates();
+	void keepThings();
 }
 
-class LockerOwner implements Person2
+class LockerOwner implements Gentlemen
 {
 	String name;
 	@Override
-	public void takeFood() {
+	public void keepThings() {
 		// TODO Auto-generated method stub
-		System.out.println("Consumes food");
+		System.out.println("Operating locker");
 	}
 	@Override
-	public void openTheLocker(Building1 bd, Key k) throws LockException,UnlockException  //Passing Object Parameter & Exception handling
+	public void openTheLocker(Cabinet1 cb, Key k) throws LockException,UnlockException  //Passing Object Parameter & Exception handling
 	 {
 		// TODO Auto-generated method stub
-		Locker home =(Locker) bd;
-		if(home.dr.password.equals(k.password))
+		Locker bank =(Locker) cb;
+		if(bank.dr.password.equals(k.password))
 		{
-			home.dr.unlocklocker();
+			bank.dr.unlocklocker();
 		}
 		else
 		{
 			throw new UnlockException("unable to lock");
 		}
 		k.unlockPwd();
-		if(home.dr.password.equals(k.password))
+		if(bank.dr.password.equals(k.password))
 		{
-			home.dr.locklocker();
+			bank.dr.locklocker();
 		}
 		else
 		{
 			throw new LockException("unable to unlock");
 		}
 	}
+	@Override
+	public void operates() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 //Customised Exceptions
 class UnlockException extends Exception
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	UnlockException(String str)
 	{
 	super(str);
@@ -83,6 +96,11 @@ class UnlockException extends Exception
 }
 class LockException extends Exception
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	LockException(String str)
 	{
 	super(str);
@@ -146,43 +164,49 @@ class Parking
 {
 	
 }
-class CarParking extends Parking   //IsA 
+class BankCarParking extends Parking   //IsA 
 {
 	void parkingAvailable()
 	{
-		System.out.println("u can park the car");
+		System.out.println("Please park the car in the parking ");
+		
 	}
 }
-class Building1 
+class Cabinet1 
 {
 	
 }
-class Locker extends Building1 implements Runnable //MultiThreading
+class Locker extends Cabinet1 implements Runnable //MultiThreading
 {
 	int lockerNumber;
-	String lockerName;
+	String lockerHolderName;
 	String address;
 	Lock dr;
-    Parking p = new CarParking(); //HasA
+	int pincode; 
+    Parking p = new BankCarParking(); //HasA
    
-	public Locker(int lockerNumber, String lockerName, String address,String pwd) {
+	public Locker(int lockerNumber, String lockerHolderName, String address,String pwd,int pincode) {
 		super();                           // super class Constructor
 		this.lockerNumber = lockerNumber;
-		this.lockerName = lockerName;
+		this.lockerHolderName = lockerHolderName;
 		this.address = address;
 		 dr = new LockerLock(pwd);
+		 this.pincode = pincode;
 	}
+	
 	@Override
-	public String toString() {                                  //ToString Overriding'+'
-		return "locker [lockerNumber=" + lockerNumber + ", lockerName=" + lockerName + ", address=" + address + "]";
+	public String toString() {
+		return "Locker [lockerNumber=" + lockerNumber + ", lockerHolderName=" + lockerHolderName + ", address="
+				+ address + ", dr=" + dr + ", pincode=" + pincode + ", p=" + p + "]";
 	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		System.out.println("Testing MultiThread");
 		for(int i=1;i<=100;i++)
 		{
-			System.out.println(lockerName+"Testing "+i);
+			System.out.println(lockerHolderName+"Testing "+i);
 		}
 	}
 	
