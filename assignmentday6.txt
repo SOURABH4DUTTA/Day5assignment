@@ -1,0 +1,189 @@
+public class ExceptionTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Main Loop begins");
+		Locker h1 = new Locker(102, "Mathru Nilaya", "Bengaluru", "abcd");
+		Locker h2 = new Locker(112, "Sai Nilaya", "Navi Mumbai", "efgh");
+		LockerOwner o1 = new LockerOwner();
+		LockerOwner o2 = new LockerOwner();
+		LockerKey hk1 = new LockerKey("abcd");
+		LockerKey hk2 = new LockerKey("efgh");
+		
+		Thread td1 = new Thread(h1);
+		td1.start();
+		Thread td2 = new Thread(h2);
+		td2.start();
+		
+		try
+		{
+			o1.openTheLocker(h1,hk1);
+		}
+		catch (LockException e) {
+			// TODO: handle exception
+			System.out.println("Lock Problem "+e);
+		}
+		catch (UnlockException e) {
+			// TODO: handle exception
+			System.out.println("Unlock Problem "+e);
+		}
+		System.out.println("locker Details "+h1);
+		System.out.println("Main Loop ends");
+
+	}
+
+}
+//Interface
+interface Person2
+{
+	void openTheLocker(Building1 bd,Key k) throws LockException,UnlockException;
+	void takeFood();
+}
+
+class LockerOwner implements Person2
+{
+	String name;
+	@Override
+	public void takeFood() {
+		// TODO Auto-generated method stub
+		System.out.println("Consumes food");
+	}
+	@Override
+	public void openTheLocker(Building1 bd, Key k) throws LockException,UnlockException  //Passing Object Parameter & Exception handling
+	 {
+		// TODO Auto-generated method stub
+		Locker home =(Locker) bd;
+		if(home.dr.password.equals(k.password))
+		{
+			home.dr.unlocklocker();
+		}
+		else
+		{
+			throw new UnlockException("unable to lock");
+		}
+		k.unlockPwd();
+		if(home.dr.password.equals(k.password))
+		{
+			home.dr.locklocker();
+		}
+		else
+		{
+			throw new LockException("unable to unlock");
+		}
+	}
+}
+
+//Customised Exceptions
+class UnlockException extends Exception
+{
+	UnlockException(String str)
+	{
+	super(str);
+	}
+}
+class LockException extends Exception
+{
+	LockException(String str)
+	{
+	super(str);
+	}
+}
+
+//abstract class, Inheritance
+abstract class Key
+{
+	String password;
+	abstract void unlockPwd();
+	abstract void lockPwd();
+}
+class LockerKey extends Key
+{
+	protected LockerKey(String password)   //Protected Access Specifier
+	{
+		super();
+		this.password = password;
+	}
+	@Override
+	void unlockPwd() {                      //Default Access Specifier
+		// TODO Auto-generated method stub
+		System.out.println("pwd is unlocked");
+	}
+
+	@Override
+	void lockPwd() {
+		// TODO Auto-generated method stub
+		System.out.println("pwd is locked");
+	}
+}
+abstract class Lock
+{
+	String password;
+	abstract void unlocklocker();
+	abstract void locklocker();
+}
+class LockerLock extends Lock
+{
+    public LockerLock(String password)
+	{
+		super();
+		this.password = password;
+	}
+	@Override
+	void unlocklocker() {
+		// TODO Auto-generated method stub
+		System.out.println("Locker is unlocked");
+	}
+
+	@Override
+	void locklocker() {
+		// TODO Auto-generated method stub
+		System.out.println("Locker is locked");
+	}
+	
+}
+
+class Parking
+{
+	
+}
+class CarParking extends Parking   //IsA 
+{
+	void parkingAvailable()
+	{
+		System.out.println("u can park the car");
+	}
+}
+class Building1 
+{
+	
+}
+class Locker extends Building1 implements Runnable //MultiThreading
+{
+	int lockerNumber;
+	String lockerName;
+	String address;
+	Lock dr;
+    Parking p = new CarParking(); //HasA
+   
+	public Locker(int lockerNumber, String lockerName, String address,String pwd) {
+		super();                           // super class Constructor
+		this.lockerNumber = lockerNumber;
+		this.lockerName = lockerName;
+		this.address = address;
+		 dr = new LockerLock(pwd);
+	}
+	@Override
+	public String toString() {                                  //ToString Overriding'+'
+		return "locker [lockerNumber=" + lockerNumber + ", lockerName=" + lockerName + ", address=" + address + "]";
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		System.out.println("Testing MultiThread");
+		for(int i=1;i<=100;i++)
+		{
+			System.out.println(lockerName+"Testing "+i);
+		}
+	}
+	
+}
