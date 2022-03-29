@@ -56,18 +56,18 @@ class LockerOwner implements Gentlemen
 	 {
 		// TODO Auto-generated method stub
 		Locker bank =(Locker) cb;
-		if(bank.dr.password.equals(k.password))
+		if(bank.lo.password.equals(k.password))
 		{
-			bank.dr.unlocklocker();
+			bank.lo.unlocklocker();
 		}
 		else
 		{
 			throw new UnlockException("unable to lock");
 		}
 		k.unlockPwd();
-		if(bank.dr.password.equals(k.password))
+		if(bank.lo.password.equals(k.password))
 		{
-			bank.dr.locklocker();
+			bank.lo.locklocker();
 		}
 		else
 		{
@@ -181,7 +181,7 @@ class Locker extends Cabinet1 implements Runnable //MultiThreading
 	int lockerNumber;
 	String lockerHolderName;
 	String address;
-	Lock dr;
+	Lock lo;
 	int pincode; 
     Parking p = new BankCarParking(); //HasA
    
@@ -190,14 +190,14 @@ class Locker extends Cabinet1 implements Runnable //MultiThreading
 		this.lockerNumber = lockerNumber;
 		this.lockerHolderName = lockerHolderName;
 		this.address = address;
-		 dr = new LockerLock(pwd);
+		 lo = new LockerLock(pwd);
 		 this.pincode = pincode;
 	}
 	
 	@Override
 	public String toString() {
 		return "Locker [lockerNumber=" + lockerNumber + ", lockerHolderName=" + lockerHolderName + ", address="
-				+ address + ", dr=" + dr + ", pincode=" + pincode + ", p=" + p + "]";
+				+ address + ", dr=" + lo + ", pincode=" + pincode + ", p=" + p + "]";
 	}
 
 	@Override
@@ -206,7 +206,7 @@ class Locker extends Cabinet1 implements Runnable //MultiThreading
 		System.out.println("Testing MultiThread");
 		for(int i=1;i<=100;i++)
 		{
-			System.out.println(lockerHolderName+"Testing "+i);
+			System.out.println("lockerHolderName is "  +lockerHolderName + " lockerNumber is " +lockerNumber +" address is " +address+" pincode is " +pincode + " Testing "+i);
 		}
 	}
 	
